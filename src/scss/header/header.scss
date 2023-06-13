@@ -1,0 +1,56 @@
+.header {
+  background: var(--container-color);
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--bg-color);
+
+    span {
+      color: var(--second-color);
+    }
+  }
+
+  .login {
+    padding: 8px 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    background: var(--second-color);
+    color: var(--bg-color);
+  }
+  .login:hover {
+    background-color: hsl(24, 98%, 58%);
+  }
+}
+
+// Home
+
+.home {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 2.5rem 0;
+  width: 100%;
+  min-width: 440px;
+}
+
+.home-text {
+  color: var(--bg-color);
+  text-align: center;
+}
+
+.home-title {
+  font-size: 3.5rem;
+}
+
+.home-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+}
