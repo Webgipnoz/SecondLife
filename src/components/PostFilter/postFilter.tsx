@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveFilter } from "../../redux/slices/filterSlice";
+import { RootState } from "../../redux/store";
 
 import "../../scss/header/postFilter.scss";
 
 const PostFilter = () => {
-  const [activeFilter, setActiveFilter] = useState(0);
+  const activeFilter = useSelector((state: RootState) => state.filter.idFilter);
+  const dispatch = useDispatch();
 
   const filtersItems = ["All", "Documents", "Help", "Family"];
-
-  const onClickFilter = (index: number) => {
-    setActiveFilter(index);
-  };
 
   return (
     <div className="post-filter container">
       {filtersItems.map((filter, i) => (
         <span
-          onClick={() => onClickFilter(i)}
+          key={i}
+          onClick={() => dispatch(setActiveFilter(i))}
           className={
             activeFilter === i ? "filter-item active-filter" : "filter-item"
           }

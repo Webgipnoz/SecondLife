@@ -1,31 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Provider } from "react-redux/es/exports";
 
-import Header from "./components/Header/header";
-import PostFilter from "./components/PostFilter/postFilter";
-import PostBox from "./components/PostBox/postBox";
+import Header from "./components/Header/Header";
+import PostFilter from "./components/PostFilter/PostFilter";
+import PostBlock from "./components/PostBox/PostBlock";
+import SkeletonBlock from "./components/PostBox/SkeletonBlock";
+import store from "./redux/store";
 
+import posts from "./posts.json";
 import "./scss/index.scss";
 
 function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <PostFilter />
-      {/* Posts */}
       <section className="post container">
-        <PostBox
-          img={"img/post1.jpg"}
-          title={"How to start Your Way"}
-          categoty={"Documents"}
-          date={"12 Feb 2023"}
-          decription={
-            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremquedolorem illum distinctio mollitia a nostrum vero, maxime eaque!Autem minima labore, tempore dolorem quo nisi."
-          }
-          profileImg={"img/profile1.jpg"}
-          profileName={"Ivan Petrov"}
-        />
+        {/* {isLoading
+          ? [...new Array(6)].map((_, i) => <SkeletonBlock key={i} />)
+          : {posts.map((obj) => (
+          <PostBlock key={obj.id} {...obj} />
+        ))}*/}
+        {posts.map((obj) => (
+          <PostBlock key={obj.id} {...obj} />
+        ))}
       </section>
-    </>
+    </Provider>
   );
 }
 
