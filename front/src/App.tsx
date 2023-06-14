@@ -3,8 +3,8 @@ import { Provider } from "react-redux/es/exports";
 
 import Header from "./components/Header/Header";
 import PostFilter from "./components/PostFilter/PostFilter";
-import PostBlock from "./components/PostBox/PostBlock";
-import SkeletonBlock from "./components/PostBox/SkeletonBlock";
+import PostBlock from "./components/PostBlock/PostBlock";
+import SkeletonBlock from "./components/PostBlock/SkeletonBlock";
 import store from "./redux/store";
 
 import posts from "./posts.json";
