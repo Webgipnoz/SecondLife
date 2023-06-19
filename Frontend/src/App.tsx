@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Provider } from "react-redux/es/exports";
 
-import Home from "./pages/Home";
+import Home from "./pages/homePage";
 import store from "./redux/store";
 
 import "./scss/index.scss";
