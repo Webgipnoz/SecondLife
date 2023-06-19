@@ -1,7 +1,7 @@
 import React from "react";
 
-const index = () => {
+const Login = () => {
   return <div>Это страница Логина</div>;
 };
 
-export default index;
+export default Login;

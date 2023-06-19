@@ -1,7 +1,13 @@
 import React from "react";
+import Header from "../../components/Header/Header";
+import PostBlock from "../../components/PostBlock/PostBlock";
 
-const index = () => {
-  return <div>Это страница Поста</div>;
+const Post = () => {
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
-export default index;
+export default Post;

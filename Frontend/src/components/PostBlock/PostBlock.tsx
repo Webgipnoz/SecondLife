@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Post } from "../../types/post";
 
@@ -11,6 +11,7 @@ const PostBlock = (props: PostBockProps) => {
   const activeCategory = useSelector(
     (state: RootState) => state.filter.idFilter
   );
+
   return (
     <>
       {
@@ -23,9 +24,7 @@ const PostBlock = (props: PostBockProps) => {
         >
           <img src={post.img} alt="#" className="post-img"></img>
           <h2 className="category">{post.category}</h2>
-          <a href="#" className="post-title">
-            {post.title}
-          </a>
+          <a className="post-title">{post.title}</a>
           <span className="post-date">{post.date}</span>
           <p className="post-decription">{post.description}</p>
           <div className="profile">
