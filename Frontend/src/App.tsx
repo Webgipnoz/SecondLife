@@ -2,7 +2,7 @@ import { Provider } from "react-redux/es/exports";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/homePage";
-import Post from "./pages/postPage";
+import PostDetiles from "./pages/postPage";
 import Login from "./pages/loginPage";
 import store from "./redux/store";
 
@@ -13,7 +13,7 @@ function App() {
     <Provider store={store}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/post" element={<Post />} />
+        <Route path="/post/:id" element={<PostDetiles />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Provider>

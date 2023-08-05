@@ -1,21 +1,29 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Post } from "../../types/post";
+import { useNavigate, useParams } from "react-router-dom";
 
 type PostBockProps = {
   post: Post;
 };
 
 const PostBlock = (props: PostBockProps) => {
+  const { id } = useParams();
   const { post } = props;
+  const navigate = useNavigate();
   const activeCategory = useSelector(
     (state: RootState) => state.filter.idFilter
   );
+
+  const handleClick = () => {
+    navigate(`post/${post.id}`);
+  };
 
   return (
     <>
       {
         <div
+          onClick={id ? undefined : handleClick}
           className={
             activeCategory === post.category || activeCategory === 0
               ? "post-box"
@@ -23,7 +31,6 @@ const PostBlock = (props: PostBockProps) => {
           }
         >
           <img src={post.img} alt="#" className="post-img"></img>
-          <h2 className="category">{post.category}</h2>
           <a className="post-title">{post.title}</a>
           <span className="post-date">{post.date}</span>
           <p className="post-decription">{post.description}</p>
