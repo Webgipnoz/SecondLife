@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveFilter } from "../../redux/slices/filterSlice";
 import { RootState } from "../../redux/store";
 
-import "../../scss/header/postFilter.scss";
+import "../../scss/postFilter/postFilter.scss";
 
 const PostFilter = () => {
   const activeFilter = useSelector((state: RootState) => state.filter.idFilter);

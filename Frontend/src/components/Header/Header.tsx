@@ -1,18 +1,24 @@
 import React from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import "../../scss/header/header.scss";
 
 const Header = () => {
+  const location = useLocation();
+  const isLogin = location.pathname === "/login";
+
   return (
     <>
       <div className="header">
         <div className="nav container">
-          <a href="#" className="logo">
+          <Link to="/" className="logo">
             Second<span>Life</span>
-          </a>
-          <a href="#" className="login">
-            Login
-          </a>
+          </Link>
+          {!isLogin && (
+            <Link to="/login" className="login">
+              Login
+            </Link>
+          )}
         </div>
         <section className="home" id="home">
           <div className="home-text container">
