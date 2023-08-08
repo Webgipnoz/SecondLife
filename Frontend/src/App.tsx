@@ -7,6 +7,7 @@ import Login from "./pages/loginPage";
 import store from "./redux/store";
 
 import "./scss/index.scss";
+import Register from "./pages/registerPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<PostDetiles />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Provider>
   );

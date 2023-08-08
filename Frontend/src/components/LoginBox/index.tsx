@@ -1,13 +1,14 @@
 import React from "react";
 
 import "../../scss/login/login.scss";
+import { Link } from "react-router-dom";
 
 const LoginBox = () => {
   return (
     <div className="centered-content">
       <div className="login-form">
         <div className="input-group">
-          <label>username</label>
+          <label>Username</label>
           <input
             type="text"
             id="username"
@@ -16,7 +17,7 @@ const LoginBox = () => {
           />
         </div>
         <div className="input-group">
-          <label>password</label>
+          <label>Password</label>
           <input
             type="password"
             id="password"
@@ -24,8 +25,10 @@ const LoginBox = () => {
               enter your password"
           />{" "}
         </div>
-        <button className="submit-button">Enter</button>
-        <button className="submit-button">Register</button>
+        <button className="submit-button">Sign In</button>
+        <button className="submit-button">
+          <Link to="/register">Sign Up</Link>
+        </button>
       </div>
     </div>
   );
