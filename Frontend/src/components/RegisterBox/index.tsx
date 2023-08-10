@@ -56,11 +56,13 @@ const RegisterBox = () => {
   return (
     <>
       {success ? (
-        <section>
-          <h1>Success</h1>
-          <p>
-            <Link to="/">Look Posts</Link>
-          </p>
+        <section className="centered-content">
+          <div className="register-form">
+            <h1>Success</h1>
+            <p>
+              <Link to="/">Look Posts</Link>
+            </p>
+          </div>
         </section>
       ) : (
         <section className="centered-content">
