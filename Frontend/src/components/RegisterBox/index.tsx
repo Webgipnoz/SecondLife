@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import axios from "../../api/axios";
 import "../../scss/index.scss";
 
 const userRegex = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const registerUrl = "/register";
 
 const RegisterBox = () => {
   const userRef = useRef<HTMLInputElement>(null);
