@@ -13,6 +13,6 @@ app.use(
 const routes = require("./routes/index");
 routes(app);
 
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

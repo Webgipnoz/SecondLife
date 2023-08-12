@@ -1,9 +1,11 @@
 //routing/index.js
 
 const mainRoutes = require("./main");
-const registerRoutes = require("./register");
+const userRoutes = require("./user");
+const postRoutes = require("./post");
 
 module.exports = function (app) {
   mainRoutes(app);
-  registerRoutes(app);
+  userRoutes(app);
+  postRoutes(app);
 };
