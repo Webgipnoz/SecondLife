@@ -10,12 +10,12 @@ const checkMe = (req, res, next) => {
       next();
     } catch (e) {
       return res.status(403).json({
-        message: " cant go on",
+        message: "Can't go on",
       });
     }
   } else {
     return res.status(403).json({
-      message: " cant go on",
+      message: " Can't go on",
     });
   }
 };
