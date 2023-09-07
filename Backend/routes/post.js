@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 
 const postController = require("../controllers/postController.js");
 const { checkMe } = require("../utils/checkMe.js");

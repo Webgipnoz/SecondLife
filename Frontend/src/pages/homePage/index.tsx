@@ -5,23 +5,23 @@ import PostFilter from "../../components/PostFilter/PostFilter";
 import PostBlock from "../../components/PostBlock/PostBlock";
 import SkeletonBlock from "../../components/PostBlock/SkeletonBlock";
 import { Post } from "../../types/post";
-import { postsService } from "../../services/postsService";
+//import { postsService } from "../../services/postsService";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<Post[]>();
 
-  useEffect(() => {
-    getPosts();
-  }, []);
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
 
-  const getPosts = () => {
-    postsService.fetchPosts().then(async (res) => {
-      let response = await res.json();
-      setData(response);
-      setIsLoading(false);
-    });
-  };
+  // const getPosts = () => {
+  //   postsService.fetchPosts().then(async (res) => {
+  //     let response = await res.json();
+  //     setData(response);
+  //     setIsLoading(false);
+  //   });
+  // };
 
   return (
     <>
