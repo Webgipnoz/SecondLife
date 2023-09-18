@@ -1,4 +1,4 @@
-const PostModel = require("../models/post.js");
+const PostModel = require("../models/Post.js");
 
 const getAll = async (req, res) => {
   try {
@@ -74,7 +74,7 @@ const update = async (req, res) => {
         title: req.body.title,
         text: req.body.text,
         imageUrl: req.body.imageUrl,
-        filter: req.body.filter,
+        category: req.body.category,
         user: req.userId,
       }
     );
@@ -95,7 +95,7 @@ const create = async (req, res) => {
       title: req.body.title,
       text: req.body.text,
       imageUrl: req.body.imageUrl,
-      filter: req.body.filter,
+      category: req.body.category,
       user: req.userId,
     });
 

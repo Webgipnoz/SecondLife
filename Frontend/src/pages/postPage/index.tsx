@@ -2,29 +2,43 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import PostBlock from "../../components/PostBlock/PostBlock";
 import { useParams } from "react-router-dom";
-//import { postsService } from "../../services/postsService";
 import { Post } from "../../types/post";
+import axios from "../../api/axios";
 
-const PostDetails = () => {
+const PostPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [post, setPost] = useState<Post | null>(null);
+  const [data, setData] = useState<Post | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   if (id !== undefined) {
-  //     postsService.getPost(+id).then((response) => {
-  //       setPost(response);
-  //     });
-  //   }
-  // }, [id]);
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`/posts/${id}`)
+        .then((res) => {
+          setData(res.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("We have a problem with this post");
+          setIsLoading(false);
+        });
+    }
+  }, [id]);
+
+  if (isLoading) {
+  }
 
   return (
     <div>
       <Header />
       <section className="post container">
-        {post && <PostBlock post={post} key={post.id} />}
+        {isLoading
+          ? "Loading..."
+          : data && <PostBlock post={data} key={data._id} />}
       </section>
     </div>
   );
 };
 
-export default PostDetails;
+export default PostPage;

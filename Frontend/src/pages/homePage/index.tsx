@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 
 import { Post } from "../../types/post";
-import { apiService } from "../../api/index";
 import { fetchPosts } from "../../redux/slices/postSlice";
-
-//import { postsService } from "../../services/postsService";
 
 import Header from "../../components/Header/Header";
 import PostFilter from "../../components/PostFilter/PostFilter";
@@ -22,13 +19,7 @@ const Home = () => {
     dispatch(fetchPosts());
   }, []);
 
-  // const getPosts = () => {
-  //   postsService.fetchPosts().then(async (res) => {
-  //     let response = await res.json();
-  //     setData(response);
-  //     setIsLoading(false);
-  //   });
-  // };
+  console.log(posts.items);
 
   return (
     <>
@@ -37,7 +28,7 @@ const Home = () => {
       <section className="post container">
         {isPostsLoading
           ? [...new Array(6)].map((_, i) => <SkeletonBlock key={i} />)
-          : posts.items?.map((obj, index) => (
+          : posts.items?.map((obj: Post, index) => (
               <PostBlock post={obj} key={index} />
             ))}
       </section>

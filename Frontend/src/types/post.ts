@@ -1,5 +1,6 @@
 export interface Post {
-  id: number;
+  isLoading?: boolean;
+  _id: string;
   title: string;
   img: string;
   category: number;

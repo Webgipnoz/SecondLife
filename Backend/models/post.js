@@ -9,11 +9,11 @@ const PostSchema = new mongoose.Schema(
     text: {
       type: String,
       required: true,
-      unique: true,
     },
-    filter: {
+    category: {
       type: Number,
       default: 0,
+      required: true,
     },
     viewsCount: {
       type: Number,
