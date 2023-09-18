@@ -9,7 +9,7 @@ const port = 5000;
 
 mongoose
   .connect(
-    "mongodb+srv://Admin:Admin@cluster0.obv47af.mongodb.net/secondlife?retryWrites=true&w=majority"
+    "mongodb+srv://Admin:Admin@cluster0.zi3kymn.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("db works");

@@ -74,7 +74,7 @@ const update = async (req, res) => {
         title: req.body.title,
         text: req.body.text,
         imageUrl: req.body.imageUrl,
-        tags: req.body.tags,
+        filter: req.body.filter,
         user: req.userId,
       }
     );
@@ -95,7 +95,7 @@ const create = async (req, res) => {
       title: req.body.title,
       text: req.body.text,
       imageUrl: req.body.imageUrl,
-      tags: req.body.tags,
+      filter: req.body.filter,
       user: req.userId,
     });
 

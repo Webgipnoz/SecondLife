@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/homePage";
 import PostDetiles from "./pages/postPage";
 import Login from "./pages/loginPage";
+import AddPost from "./pages/addPostPage";
+
 import store from "./redux/store";
 
 import "./scss/index.scss";
@@ -15,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<PostDetiles />} />
+        <Route path="/add-post" element={<AddPost />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

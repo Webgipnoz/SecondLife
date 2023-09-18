@@ -5,15 +5,16 @@ import PostFilter from "../../components/PostFilter/PostFilter";
 import PostBlock from "../../components/PostBlock/PostBlock";
 import SkeletonBlock from "../../components/PostBlock/SkeletonBlock";
 import { Post } from "../../types/post";
+import { apiService } from "../../api/index";
 //import { postsService } from "../../services/postsService";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<Post[]>();
 
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+  useEffect(() => {
+    apiService.getPosts();
+  }, []);
 
   // const getPosts = () => {
   //   postsService.fetchPosts().then(async (res) => {

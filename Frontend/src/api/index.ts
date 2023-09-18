@@ -1,6 +1,7 @@
+import axios from "./axios";
+
 const getPosts = () => {
-  const path = "http://localhost:5000/?path=posts";
-  return fetch(path);
+  axios.get("/posts");
 };
 
 export const apiService = {
