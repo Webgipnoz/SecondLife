@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const PostSchema = new mongoose.Schema(
   {
@@ -9,11 +9,7 @@ const PostSchema = new mongoose.Schema(
     text: {
       type: String,
       required: true,
-    },
-    category: {
-      type: Number,
-      default: 0,
-      required: true,
+      unique: true,
     },
     tags: {
       type: Array,
@@ -35,4 +31,4 @@ const PostSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Post", PostSchema);
+export default mongoose.model("Post", PostSchema);
