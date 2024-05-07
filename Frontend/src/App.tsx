@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/homePage";
 import PostPage from "./pages/postPage";
-import Login from "./pages/loginPage";
+import LoginPage from "./pages/loginPage";
 import AddPost from "./pages/addPostPage";
 
 import store from "./redux/store";
@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<PostPage />} />
         <Route path="/add-post" element={<AddPost />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </Provider>

@@ -9,6 +9,7 @@ module.exports = function (app) {
   app.get("/posts", postController.getAll);
   app.get("/posts/:id", postController.getOne);
   app.post("/posts", checkMe, postController.create);
+
   app.delete("/posts/:id", checkMe, postController.remove);
   app.patch("/posts/:id", checkMe, postController.update);
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 
 import { Post } from "../../types/post";
-import { fetchPosts } from "../../redux/slices/postSlice";
+import { fetchPosts, fetchTags } from "../../redux/slices/postSlice";
 
 import Header from "../../components/Header/Header";
 import PostFilter from "../../components/PostFilter/PostFilter";
@@ -17,9 +17,8 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchTags());
   }, []);
-
-  console.log(posts.items);
 
   return (
     <>

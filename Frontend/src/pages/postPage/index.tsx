@@ -26,9 +26,6 @@ const PostPage = () => {
     }
   }, [id]);
 
-  if (isLoading) {
-  }
-
   return (
     <div>
       <Header />

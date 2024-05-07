@@ -1,17 +1,18 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-const UserModel = require("../models/user.js");
-const checkMe = require("../utils/checkMe.js");
+import UserModel from "../models/User.js";
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
-    const password = req.body.pwd;
+    const password = req.body.password;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
     const doc = new UserModel({
-      name: req.body.name,
+      email: req.body.email,
+      fullName: req.body.fullName,
+      avatarUrl: req.body.avatarUrl,
       passwordHash: hash,
     });
 
@@ -36,29 +37,29 @@ const register = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Cant register user",
+      message: "Не удалось зарегистрироваться",
     });
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
-    const user = await UserModel.findOne({ name: req.body.name });
+    const user = await UserModel.findOne({ email: req.body.email });
 
     if (!user) {
       return res.status(404).json({
-        message: "User is not found",
+        message: "Пользователь не найден",
       });
     }
 
     const isValidPass = await bcrypt.compare(
-      req.body.pwd,
+      req.body.password,
       user._doc.passwordHash
     );
 
     if (!isValidPass) {
       return res.status(400).json({
-        message: "Uncorrect name or pwd",
+        message: "Неверный логин или пароль",
       });
     }
 
@@ -81,18 +82,18 @@ const login = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Cant enter account",
+      message: "Не удалось авторизоваться",
     });
   }
 };
 
-const getMe = async (req, res) => {
+export const getMe = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);
 
     if (!user) {
       return res.status(404).json({
-        message: "User is not found",
+        message: "Пользователь не найден",
       });
     }
 
@@ -102,9 +103,7 @@ const getMe = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Cant go on",
+      message: "Нет доступа",
     });
   }
 };
-
-module.exports = { register, login, getMe };

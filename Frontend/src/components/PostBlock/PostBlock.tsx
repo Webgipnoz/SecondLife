@@ -10,7 +10,6 @@ type PostBlockProps = {
 
 const PostBlock: React.FC<PostBlockProps> = ({ post }) => {
   const navigate = useNavigate();
-  const { posts } = useSelector((state: RootState) => state.post);
   const activeCategory = useSelector(
     (state: RootState) => state.filter.idFilter
   );

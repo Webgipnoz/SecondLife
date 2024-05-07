@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Post } from "../../types/post";
 import { apiService } from "../../api/index";
+import axios from "../../api/axios";
 
 export const fetchPosts = createAsyncThunk<Post[]>(
   "posts/fetchPosts",
@@ -17,6 +18,11 @@ export interface PostSlice {
     status: string;
   };
 }
+
+export const fetchTags = createAsyncThunk("posts/fetchTags", async () => {
+  const { data } = await apiService.getTags();
+  return data;
+});
 
 const initialState: PostSlice = {
   posts: {
