@@ -6,15 +6,16 @@ import "../../scss/login/login.scss";
 import { Link } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
-  const handleSignIn = () => {
-    const username = (document.getElementById("username") as HTMLInputElement)
-      .value;
+  const handleSignIn = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const email = (document.getElementById("email") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement)
       .value;
 
     // Создаем объект данных для отправки
     const data = {
-      username: username,
+      email: email,
       password: password,
     };
 
@@ -36,28 +37,26 @@ const LoginPage: React.FC = () => {
       <Header />
       <div className="centered-content">
         <div className="login-form">
-          <div className="input-group">
-            <label>Username</label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Enter your username"
-            />
-          </div>
-          <div className="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-            />
-          </div>
-          <button className="submit-button" onClick={handleSignIn}>
-            Sign In
-          </button>
-          <button className="submit-button">
-            <Link to="/register">Sign Up</Link>
-          </button>
+          <form onSubmit={handleSignIn}>
+            <div className="input-group">
+              <label>Email</label>
+              <input type="text" id="email" placeholder="Enter your email" />
+            </div>
+            <div className="input-group">
+              <label>Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+              />
+            </div>
+            <button type="submit" className="submit-button">
+              Sign In
+            </button>
+            <button className="submit-button">
+              <Link to="/register">Sign Up</Link>
+            </button>
+          </form>
         </div>
       </div>
     </>

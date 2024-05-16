@@ -6,15 +6,18 @@ import "../../scss/index.scss";
 
 const userRegex = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const registerUrl = "/register";
+const registerUrl = "/auth/register";
 
 const RegisterBox = () => {
   const userRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
 
   const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -26,6 +29,11 @@ const RegisterBox = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const isEmailValid = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   useEffect(() => {
     if (userRef.current) {
@@ -52,7 +60,20 @@ const RegisterBox = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSuccess(true);
+    try {
+      const response = await axios.post(registerUrl, {
+        email: email,
+        fullName: user,
+        password: pwd,
+      });
+
+      if (response.status === 200) {
+        setSuccess(true);
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
+      setErrMsg("Registration failed. Please try again.");
+    }
   };
 
   return (
@@ -103,6 +124,31 @@ const RegisterBox = () => {
                 Must begin with a letter.
                 <br />
                 Letters, numbers, underscores, hyphens allowed.
+              </p>
+
+              <label htmlFor="useremail">Email:</label>
+              <input
+                type="email"
+                id="useremail"
+                ref={emailRef}
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="emailnote"
+                onFocus={() => setUserFocus(true)}
+                onBlur={() => setUserFocus(false)}
+              ></input>
+              <p
+                id="emailnote"
+                className={
+                  userFocus && email && !isEmailValid(email)
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                Please enter a valid email address.
               </p>
 
               <label htmlFor="password">Password:</label>

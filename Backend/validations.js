@@ -15,7 +15,6 @@ export const registerValidation = [
     min: 5,
   }),
   body("fullName", "Please provide a name").isLength({ min: 3 }),
-  body("avatarUrl", "Invalid avatar URL").optional().isURL(),
 ];
 
 // Validation for creating a post

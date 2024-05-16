@@ -19,7 +19,7 @@ function App() {
         <Route path="/post/:id" element={<PostPage />} />
         <Route path="/add-post" element={<AddPost />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/auth/register" element={<Register />} />
       </Routes>
     </Provider>
   );
