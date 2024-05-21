@@ -12,11 +12,13 @@ export const fetchUserData = createAsyncThunk(
 export interface AuthSlice {
   data: any;
   status: string;
+  isAuthenticated: boolean;
 }
 
 const initialState: AuthSlice = {
   data: null,
   status: "loading",
+  isAuthenticated: false,
 };
 
 export const authSlice = createSlice({
@@ -27,6 +29,7 @@ export const authSlice = createSlice({
     builder.addCase(fetchUserData.pending, (state) => {
       state.data = null;
       state.status = "loading";
+      state.isAuthenticated = true;
     });
     builder.addCase(fetchUserData.fulfilled, (state, action) => {
       state.data = action.payload;

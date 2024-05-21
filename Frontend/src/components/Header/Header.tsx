@@ -1,11 +1,14 @@
 import React from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 import "../../scss/header/header.scss";
 
-const Header = () => {
-  const location = useLocation();
-  const isLogin = location.pathname === "/login";
+const Header: React.FC = () => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   return (
     <>
@@ -14,8 +17,12 @@ const Header = () => {
           <Link to="/" className="logo">
             Second<span>Life</span>
           </Link>
-          {!isLogin && (
-            <Link to="/login" className="login">
+          {isAuthenticated === true ? (
+            <Link to="/auth/account" className="login">
+              My Account
+            </Link>
+          ) : (
+            <Link to="/auth/login" className="login">
               Login
             </Link>
           )}

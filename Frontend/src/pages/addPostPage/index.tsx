@@ -1,7 +1,7 @@
 import React from "react";
 
-const index = () => {
+const AddPost = () => {
   return <div>Sosite</div>;
 };
 
-export default index;
+export default AddPost;

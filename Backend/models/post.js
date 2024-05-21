@@ -5,19 +5,20 @@ const PostSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     text: {
       type: String,
       required: true,
-      unique: true,
-    },
-    tags: {
-      type: Array,
-      default: [],
+      unique: false,
     },
     viewsCount: {
       type: Number,
       default: 0,
+    },
+    category: {
+      type: Number,
+      required: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

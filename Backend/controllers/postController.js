@@ -110,7 +110,7 @@ export const create = async (req, res) => {
       title: req.body.title,
       text: req.body.text,
       imageUrl: req.body.imageUrl,
-      tags: req.body.tags.split(","),
+      category: req.body.category,
       user: req.userId,
     });
 
@@ -118,9 +118,8 @@ export const create = async (req, res) => {
 
     res.json(post);
   } catch (err) {
-    console.log(err);
     res.status(500).json({
-      message: "Не удалось создать статью",
+      message: err,
     });
   }
 };

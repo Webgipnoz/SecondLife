@@ -1,12 +1,16 @@
 import React from "react";
-import axios from "axios";
 import Header from "../../components/Header/Header";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../scss/login/login.scss";
-import { Link } from "react-router-dom";
+import axios from "../../api/axios";
+
+const loginUrl = "/auth/login";
 
 const LoginPage: React.FC = () => {
-  const handleSignIn = (event: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const email = (document.getElementById("email") as HTMLInputElement).value;
@@ -20,16 +24,17 @@ const LoginPage: React.FC = () => {
     };
 
     // Отправляем данные на бэкенд
-    axios
-      .post("/login", data)
-      .then((response) => {
-        // Обработка успешного ответа от сервера
-        console.log("Успешно вошли в систему");
-      })
-      .catch((error) => {
-        // Обработка ошибки
-        console.error("Ошибка входа в систему", error);
-      });
+    try {
+      // Отправляем данные на бэкенд
+      const response = await axios.post(loginUrl, data);
+
+      // Обработка успешного ответа от сервера
+      console.log("Успешно вошли в систему");
+      navigate("/auth/account");
+    } catch (error) {
+      // Обработка ошибки
+      console.error("Ошибка входа в систему", error);
+    }
   };
 
   return (
@@ -54,7 +59,7 @@ const LoginPage: React.FC = () => {
               Sign In
             </button>
             <button className="submit-button">
-              <Link to="/register">Sign Up</Link>
+              <Link to="/auth/register">Sign Up</Link>
             </button>
           </form>
         </div>

@@ -19,11 +19,6 @@ export interface PostSlice {
   };
 }
 
-export const fetchTags = createAsyncThunk("posts/fetchTags", async () => {
-  const { data } = await apiService.getTags();
-  return data;
-});
-
 const initialState: PostSlice = {
   posts: {
     items: [],

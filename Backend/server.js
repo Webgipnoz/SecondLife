@@ -3,7 +3,8 @@ import fs from "fs";
 import multer from "multer";
 import cors from "cors";
 import mongoose from "mongoose";
-import { authRoutes, postRoutes } from "./routes/index.js";
+import authRoutes from "./routes/authRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
 
 mongoose
   .connect("mongodb+srv://Admin:Admin@cluster0.djv28ee.mongodb.net/")

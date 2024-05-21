@@ -6,7 +6,7 @@ export interface FilterSlice {
 }
 
 const initialState: FilterSlice = {
-  idFilter: 0,
+  idFilter: 1,
 };
 
 export const filterSlice = createSlice({
