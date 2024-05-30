@@ -1,45 +1,92 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { Post } from "../../types/post";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import clsx from "clsx";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import EyeIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import { Link } from "react-router-dom";
 
-type PostBlockProps = {
-  post: Post;
+import "../../scss/post/posts.scss";
+import { UserInfo } from "../UserInfo";
+import SkeletonBlock from "./SkeletonBlock";
+import { Post as PostInterface } from "../../types/post";
+
+type PostProps = PostInterface & {
+  user: {
+    fullName: string;
+    avatarUrl: string;
+  };
+  viewsCount: number;
+  commentsCount: number;
+  tags: string[];
+  children?: React.ReactNode;
+  isFullPost?: boolean;
+  isEditable?: boolean;
+  isLoading?: boolean;
 };
 
-const PostBlock: React.FC<PostBlockProps> = ({ post }) => {
-  const navigate = useNavigate();
-  const activeCategory = useSelector(
-    (state: RootState) => state.filter.idFilter
-  );
+export const Post: React.FC<PostProps> = ({
+  _id,
+  title,
+  createdAt,
+  imageUrl,
+  user,
+  viewsCount,
+  commentsCount,
+  children,
+  isFullPost,
+  isLoading,
+  isEditable,
+}) => {
+  if (isLoading) {
+    return <SkeletonBlock />;
+  }
 
-  const handleClick = () => {
-    navigate(`post/${post._id}`);
-  };
+  const onClickRemove = () => {};
 
   return (
-    <>
-      <Link to={`/post/${post._id}`}></Link>
-      <div
-        onClick={handleClick}
-        className={
-          activeCategory === post.category || activeCategory === 0
-            ? "post-box"
-            : "post-box post-box-none"
-        }
-      >
-        <img src={post.img} alt="#" className="post-img"></img>
-        <a className="post-title">{post.title}</a>
-        <span className="post-date">{post.date}</span>
-        <p className="post-decription">{post.description}</p>
-        <div className="profile">
-          <img className="profile-img" src={post.profileImg}></img>
-          <span className="profile-name">{post.profileName}</span>
+    <div className={clsx("root", { rootFull: isFullPost })}>
+      {isEditable && (
+        <div className="editButtons">
+          <Link to={`/posts/${_id}/edit`}>
+            <IconButton color="primary">
+              <EditIcon />
+            </IconButton>
+          </Link>
+          <IconButton onClick={onClickRemove} color="secondary">
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      )}
+      {imageUrl && (
+        <img
+          className={clsx("image", { imageFull: isFullPost })}
+          src={imageUrl}
+          alt={title}
+        />
+      )}
+      <div className="wrapper">
+        <UserInfo {...user} additionalText={createdAt} />
+        <div className="indention">
+          <h2 className={clsx("title", { titleFull: isFullPost })}>
+            {isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
+          </h2>
+          {children && <div className="content">{children}</div>}
+          <ul className="postDetails">
+            <li>
+              <EyeIcon />
+              <span>{viewsCount}</span>
+            </li>
+            <li>
+              <CommentIcon />
+              <span>{commentsCount}</span>
+            </li>
+          </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default PostBlock;
+export default Post;

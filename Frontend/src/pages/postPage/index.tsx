@@ -29,11 +29,7 @@ const PostPage = () => {
   return (
     <div>
       <Header />
-      <section className="post container">
-        {isLoading
-          ? "Loading..."
-          : data && <PostBlock post={data} key={data._id} />}
-      </section>
+      <section className="post container"></section>
     </div>
   );
 };

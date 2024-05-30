@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-
 import "../../scss/header/header.scss";
 
 const Header: React.FC = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
+  const [isAuth, setIsAuth] = useState(true);
+
+  const onClickLogout = () => {
+    setIsAuth(!isAuth);
+  };
 
   return (
     <>
@@ -17,15 +18,31 @@ const Header: React.FC = () => {
           <Link to="/" className="logo">
             Second<span>Life</span>
           </Link>
-          {isAuthenticated === true ? (
-            <Link to="/auth/account" className="login">
-              My Account
-            </Link>
-          ) : (
-            <Link to="/auth/login" className="login">
-              Login
-            </Link>
-          )}
+          <div className="buttons-container">
+            {isAuth ? (
+              <>
+                <Link to="/addPost" className="login">
+                  Add Post
+                </Link>
+                <Link to="#" onClick={onClickLogout} className="login">
+                  Log Out
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/auth/register" className="login">
+                  Register
+                </Link>
+                <Link
+                  to="/auth/login"
+                  onClick={onClickLogout}
+                  className="login"
+                >
+                  Login
+                </Link>
+              </>
+            )}
+          </div>
         </div>
         <section className="home" id="home">
           <div className="home-text container">

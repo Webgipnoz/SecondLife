@@ -23,13 +23,6 @@ const HomePage = () => {
     <>
       <Header />
       <PostFilter />
-      <section className="post container">
-        {isPostsLoading
-          ? [...new Array(6)].map((_, i) => <SkeletonBlock key={i} />)
-          : posts.items?.map((obj: Post, index) => (
-              <PostBlock post={obj} key={index} />
-            ))}
-      </section>
     </>
   );
 };

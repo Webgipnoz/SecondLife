@@ -8,4 +8,6 @@ export interface Post {
   description: string;
   profileImg: string;
   profileName: string;
+  createdAt: string;
+  imageUrl: string;
 }

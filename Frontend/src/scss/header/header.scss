@@ -17,6 +17,11 @@
     }
   }
 
+  .buttons-container {
+    display: flex;
+    gap: 10px; /* Пространство между кнопками */
+  }
+
   .login {
     padding: 8px 14px;
     text-transform: uppercase;
