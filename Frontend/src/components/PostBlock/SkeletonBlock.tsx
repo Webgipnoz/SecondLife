@@ -1,24 +1,38 @@
 import React from "react";
-import ContentLoader from "react-content-loader";
+import Stack from "@mui/material/Stack";
+import Skeleton from "@mui/material/Skeleton";
 
-type skeletonBlockProps = {};
+import "../../scss/post/posts.scss";
 
-const SkeletonBlock: React.FC<skeletonBlockProps> = (props) => (
-  <ContentLoader
-    speed={2}
-    width={340}
-    height={441}
-    viewBox="0 0 340 441"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-    {...props}
-  >
-    <circle cx="32" cy="332" r="15" />
-    <rect x="15" y="225" rx="15" ry="15" width="310" height="16" />
-    <rect x="15" y="250" rx="15" ry="15" width="310" height="57" />
-    <rect x="15" y="15" rx="15" ry="15" width="310" height="200" />
-    <rect x="60" y="323" rx="15" ry="15" width="104" height="22" />
-  </ContentLoader>
-);
-
+export const SkeletonBlock = () => {
+  return (
+    <div className="skeleton">
+      <Stack spacing={1}>
+        <Skeleton variant="rectangular" width="100%" height={300} />
+        <div className="skeletonContent">
+          <div className="skeletonUser">
+            <Skeleton
+              variant="circular"
+              width={40}
+              height={40}
+              style={{ marginRight: 10 }}
+            />
+            <div className="skeletonUserDetails">
+              <Skeleton variant="text" width={60} height={20} />
+              <Skeleton variant="text" width={100} height={15} />
+            </div>
+          </div>
+          <div className="skeletonInfo">
+            <Skeleton variant="text" width="80%" height={45} />
+            <div className="skeletonTags">
+              <Skeleton variant="text" width={40} height={30} />
+              <Skeleton variant="text" width={40} height={30} />
+              <Skeleton variant="text" width={40} height={30} />
+            </div>
+          </div>
+        </div>
+      </Stack>
+    </div>
+  );
+};
 export default SkeletonBlock;

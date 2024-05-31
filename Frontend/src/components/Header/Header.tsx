@@ -33,11 +33,7 @@ const Header: React.FC = () => {
                 <Link to="/auth/register" className="login">
                   Register
                 </Link>
-                <Link
-                  to="/auth/login"
-                  onClick={onClickLogout}
-                  className="login"
-                >
+                <Link to="/auth/login" className="login">
                   Login
                 </Link>
               </>

@@ -7,49 +7,43 @@ import EyeIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import CommentIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import { Link } from "react-router-dom";
 
+import { Post } from "../../types/post";
+
 import "../../scss/post/posts.scss";
 import { UserInfo } from "../UserInfo";
 import SkeletonBlock from "./SkeletonBlock";
-import { Post as PostInterface } from "../../types/post";
 
-type PostProps = PostInterface & {
+type LoadingPostProps = {
+  isLoading: true;
+  key: number;
+};
+
+type PostProps = Post & {
   user: {
     fullName: string;
-    avatarUrl: string;
+    avatarLetter: string;
   };
-  viewsCount: number;
-  commentsCount: number;
-  tags: string[];
+  imageUrl: string;
   children?: React.ReactNode;
   isFullPost?: boolean;
   isEditable?: boolean;
-  isLoading?: boolean;
+  isLoading: false;
 };
 
-export const Post: React.FC<PostProps> = ({
-  _id,
-  title,
-  createdAt,
-  imageUrl,
-  user,
-  viewsCount,
-  commentsCount,
-  children,
-  isFullPost,
-  isLoading,
-  isEditable,
-}) => {
-  if (isLoading) {
+type Props = LoadingPostProps | PostProps;
+
+export const PostComponent: React.FC<Props> = (props) => {
+  if (props.isLoading) {
     return <SkeletonBlock />;
   }
 
   const onClickRemove = () => {};
 
   return (
-    <div className={clsx("root", { rootFull: isFullPost })}>
-      {isEditable && (
+    <div className={clsx("root", { rootFull: props.isFullPost })}>
+      {props.isEditable && (
         <div className="editButtons">
-          <Link to={`/posts/${_id}/edit`}>
+          <Link to={`/posts/${props.id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -59,28 +53,32 @@ export const Post: React.FC<PostProps> = ({
           </IconButton>
         </div>
       )}
-      {imageUrl && (
+      {props.imageUrl && (
         <img
-          className={clsx("image", { imageFull: isFullPost })}
-          src={imageUrl}
-          alt={title}
+          className={clsx("image", { imageFull: props.isFullPost })}
+          src={props.imageUrl}
+          alt={props.title}
         />
       )}
       <div className="wrapper">
-        <UserInfo {...user} additionalText={createdAt} />
+        <UserInfo {...props.user} additionalText={props.createdAt} />
         <div className="indention">
-          <h2 className={clsx("title", { titleFull: isFullPost })}>
-            {isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
+          <h2 className={clsx("title", { titleFull: props.isFullPost })}>
+            {props.isFullPost ? (
+              props.title
+            ) : (
+              <Link to={`/posts/${props.id}`}>{props.title}</Link>
+            )}
           </h2>
-          {children && <div className="content">{children}</div>}
+          {props.children && <div className="content">{props.children}</div>}
           <ul className="postDetails">
             <li>
               <EyeIcon />
-              <span>{viewsCount}</span>
+              <span>{props.viewsCount}</span>
             </li>
             <li>
               <CommentIcon />
-              <span>{commentsCount}</span>
+              <span>{props.commentsCount}</span>
             </li>
           </ul>
         </div>
@@ -89,4 +87,4 @@ export const Post: React.FC<PostProps> = ({
   );
 };
 
-export default Post;
+export default PostComponent;
