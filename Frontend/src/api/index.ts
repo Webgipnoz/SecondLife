@@ -5,12 +5,6 @@ const getPosts = async () => {
   return res.data;
 };
 
-const getTags = async () => {
-  const res = await axios.get("/tags");
-  return res.data;
-};
-
 export const apiService = {
   getPosts,
-  getTags,
 };

@@ -6,14 +6,11 @@ import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
-export const AddComment = () => {
+export const AddComment: React.FC = () => {
   return (
     <>
       <div className="root">
-        <Avatar
-          classes={{ root: "avatar" }}
-          src="https://mui.com/static/images/avatar/5.jpg"
-        />
+        <Avatar classes={{ root: "avatar" }} />
         <div className="form">
           <TextField
             label="add your comment"

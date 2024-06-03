@@ -32,7 +32,7 @@ type PostProps = Post & {
 
 type Props = LoadingPostProps | PostProps;
 
-export const PostComponent: React.FC<Props> = (props) => {
+export const PostBlock: React.FC<Props> = (props) => {
   if (props.isLoading) {
     return <SkeletonBlock />;
   }
@@ -43,7 +43,7 @@ export const PostComponent: React.FC<Props> = (props) => {
     <div className={clsx("root", { rootFull: props.isFullPost })}>
       {props.isEditable && (
         <div className="editButtons">
-          <Link to={`/posts/${props.id}/edit`}>
+          <Link to={`/posts/${props._id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -67,7 +67,7 @@ export const PostComponent: React.FC<Props> = (props) => {
             {props.isFullPost ? (
               props.title
             ) : (
-              <Link to={`/posts/${props.id}`}>{props.title}</Link>
+              <Link to={`/posts/${props._id}`}>{props.title}</Link>
             )}
           </h2>
           {props.children && <div className="content">{props.children}</div>}
@@ -87,4 +87,4 @@ export const PostComponent: React.FC<Props> = (props) => {
   );
 };
 
-export default PostComponent;
+export default PostBlock;

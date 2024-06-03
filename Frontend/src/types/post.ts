@@ -1,11 +1,11 @@
 export interface Post {
   isLoading?: boolean;
-  id: number;
+  _id: number;
   title: string;
   imageUrl: string;
   category: number;
-  description: string;
-  profileName: string;
+  text: string;
+  fullName: string;
   createdAt: string;
   viewsCount: number;
   commentsCount: number;
