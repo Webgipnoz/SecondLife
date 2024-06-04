@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { Link } from "react-router-dom";
 import "../../scss/header/header.scss";
 
 const Header: React.FC = () => {

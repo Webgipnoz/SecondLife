@@ -17,7 +17,7 @@ function App() {
     <Provider store={store}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/posts/:id" element={<PostPage />} />
+        <Route path="/posts/:_id" element={<PostPage />} />
         <Route path="/addPost" element={<AddPost />} />
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />

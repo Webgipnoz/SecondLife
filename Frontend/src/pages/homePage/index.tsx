@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { AppDispatch, RootState } from "../../redux/store";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -52,7 +53,7 @@ const HomePage = () => {
                     _id={obj._id}
                     title={obj.title}
                     category={obj.category}
-                    imageUrl="https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"
+                    imageUrl={obj.imageUrl}
                     text={obj.text}
                     fullName={obj.fullName}
                     createdAt={obj.createdAt}
