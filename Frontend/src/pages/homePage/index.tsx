@@ -29,7 +29,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Header />
       <PostFilter />
       <Tabs
         style={{ marginBottom: 15 }}

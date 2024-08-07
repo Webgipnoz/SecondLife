@@ -9,9 +9,9 @@ import Button from "@mui/material/Button";
 export const AddComment: React.FC = () => {
   return (
     <>
-      <div className="root">
+      <div className="addComment">
         <Avatar
-          classes={{ root: "avatar" }}
+          className="avatar"
           src="https://mui.com/static/images/avatar/5.jpg"
         />
         <div className="form">

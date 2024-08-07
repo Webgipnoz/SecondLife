@@ -39,7 +39,6 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <Header />
       <div className="centered-content">
         <div className="login-form">
           <form onSubmit={handleSignIn}>
