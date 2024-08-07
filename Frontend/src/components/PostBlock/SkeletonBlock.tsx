@@ -27,7 +27,6 @@ export const SkeletonBlock = () => {
             <div className="skeletonTags">
               <Skeleton variant="text" width={40} height={30} />
               <Skeleton variant="text" width={40} height={30} />
-              <Skeleton variant="text" width={40} height={30} />
             </div>
           </div>
         </div>

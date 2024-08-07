@@ -10,7 +10,10 @@ export const AddComment: React.FC = () => {
   return (
     <>
       <div className="root">
-        <Avatar classes={{ root: "avatar" }} />
+        <Avatar
+          classes={{ root: "avatar" }}
+          src="https://mui.com/static/images/avatar/5.jpg"
+        />
         <div className="form">
           <TextField
             label="add your comment"
@@ -19,7 +22,7 @@ export const AddComment: React.FC = () => {
             multiline
             fullWidth
           />
-          <Button variant="contained">Отправить</Button>
+          <Button variant="contained">Send</Button>
         </div>
       </div>
     </>
