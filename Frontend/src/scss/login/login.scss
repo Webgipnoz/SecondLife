@@ -1,9 +1,9 @@
 .centered-content {
-  margin: 2rem;
-  margin-left: 35rem; //КОСТЫЛЬ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  justify-content: center;
+  align-items: center;
+  margin-left: 35rem;
   width: 80%;
   max-width: 800px;
-  padding: 2rem;
   background: var(--bg-color);
 }
 

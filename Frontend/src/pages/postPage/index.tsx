@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
 import PostBlock from "../../components/PostBlock/PostBlock";
 import { useParams } from "react-router-dom";
 import { Post } from "../../types/post";

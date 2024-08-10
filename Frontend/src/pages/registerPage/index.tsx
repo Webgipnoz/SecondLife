@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Header from "../../components/Header/Header";
 
 import axios from "../../api/axios";
 import "../../scss/index.scss";
@@ -79,7 +78,6 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Header />
       {success ? (
         <section className="centered-content">
           <div className="register-form">

@@ -8,7 +8,6 @@ import Grid from "@mui/material/Grid";
 
 import { fetchPosts } from "../../redux/slices/postSlice";
 
-import Header from "../../components/Header/Header";
 import PostFilter from "../../components/PostFilter/PostFilter";
 import PostBlock from "../../components/PostBlock/PostBlock";
 import SkeletonBlock from "../../components/PostBlock/SkeletonBlock";
