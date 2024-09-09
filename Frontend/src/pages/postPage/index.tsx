@@ -44,8 +44,9 @@ const PostPage = () => {
             category={data.category}
             text={data.text}
             user={{
-              avatarLetter: "A",
-              fullName: "Keff",
+              avatarLetter: data.user.avatarLetter || "N/A",
+              fullName: data.user.fullName,
+              avatarUrl: data.user.avatarUrl,
             }}
             createdAt={data.createdAt}
             viewsCount={data.viewsCount}
@@ -54,13 +55,7 @@ const PostPage = () => {
             isFullPost
             isLoading={false}
           >
-            <p>
-              Hey there! 👋 I'm starting a new series called "Roast the Code",
-              where I will share some code, and let YOU roast and improve it.
-              There's not much more to it, just be polite and constructive, this
-              is an exercise so we can all learn together. Now then, head over
-              to the repo and roast as hard as you can!!
-            </p>
+            <p>{data.text}</p>
           </PostBlock>
         )}
       </div>

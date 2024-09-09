@@ -44,11 +44,11 @@ export const PostBlock: React.FC<Props> = (props) => {
     <div className={clsx(styles.root, { [styles.rootFull]: props.isFullPost })}>
       {props.isEditable && (
         <div className={styles.editButtons}>
-          <a href={`/posts/${props._id}/edit`}>
+          <Link to={`/posts/${props._id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
-          </a>
+          </Link>
           <IconButton onClick={onClickRemove} color="secondary">
             <DeleteIcon />
           </IconButton>
@@ -74,7 +74,7 @@ export const PostBlock: React.FC<Props> = (props) => {
             {props.isFullPost ? (
               props.title
             ) : (
-              <a href={`/posts/${props._id}`}>{props.title}</a>
+              <Link to={`/posts/${props._id}`}>{props.title}</Link>
             )}
           </h2>
           {props.children && (

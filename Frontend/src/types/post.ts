@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface Post {
   isLoading?: boolean;
   _id: number;
@@ -8,5 +10,6 @@ export interface Post {
   fullName: string;
   createdAt: string;
   viewsCount: number;
+  user: User;
   commentsCount: number;
 }
