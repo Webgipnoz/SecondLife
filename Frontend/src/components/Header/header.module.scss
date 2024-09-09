@@ -1,10 +1,18 @@
 .header {
+  --container-color: #1a1e21;
+  --second-color: #fd8f44;
+  --text-color: #172317;
+  --bg-color: #fff;
+
   background: var(--container-color);
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 18px 0;
+    max-width: 1068px;
+    margin: auto;
+    width: 100%;
   }
 
   .logo {
@@ -17,9 +25,9 @@
     }
   }
 
-  .buttons-container {
+  .buttonsContainer {
     display: flex;
-    gap: 10px; /* Пространство между кнопками */
+    gap: 10px;
   }
 
   .login {
@@ -46,16 +54,16 @@
   min-width: 440px;
 }
 
-.home-text {
+.homeText {
   color: var(--bg-color);
   text-align: center;
 }
 
-.home-title {
+.homeTitle {
   font-size: 3.5rem;
 }
 
-.home-subtitle {
+.homeSubtitle {
   font-size: 1rem;
   font-weight: 400;
 }

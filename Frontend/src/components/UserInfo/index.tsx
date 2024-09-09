@@ -1,5 +1,5 @@
 import React from "react";
-import "../../scss/userInfo/userInfo.scss";
+import styles from "./userInfo.module.scss";
 
 interface UserInfoProps {
   fullName: string;
@@ -11,10 +11,10 @@ export const UserInfo: React.FC<UserInfoProps> = ({
   additionalText,
 }) => {
   return (
-    <div className="root">
-      <div className="userDetails">
-        <span className="userName">{fullName}</span>
-        <span className="additional">{additionalText}</span>
+    <div className={styles.root}>
+      <div className={styles.userDetails}>
+        <span className={styles.userName}>{fullName}</span>
+        <span className={styles.additional}>{additionalText}</span>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 import { Post } from "../../types/post";
 
-import "../../scss/post/posts.scss";
+import styles from "./posts.module.scss";
 import { UserInfo } from "../UserInfo";
 import SkeletonBlock from "./SkeletonBlock";
 
@@ -41,14 +41,14 @@ export const PostBlock: React.FC<Props> = (props) => {
   const onClickRemove = () => {};
 
   return (
-    <div className={clsx("root", { rootFull: props.isFullPost })}>
+    <div className={clsx(styles.root, { [styles.rootFull]: props.isFullPost })}>
       {props.isEditable && (
-        <div className="editButtons">
-          <Link to={`/posts/${props._id}/edit`}>
+        <div className={styles.editButtons}>
+          <a href={`/posts/${props._id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
-          </Link>
+          </a>
           <IconButton onClick={onClickRemove} color="secondary">
             <DeleteIcon />
           </IconButton>
@@ -56,23 +56,31 @@ export const PostBlock: React.FC<Props> = (props) => {
       )}
       {props.imageUrl && (
         <img
-          className={clsx("image", { imageFull: props.isFullPost })}
+          className={clsx(styles.image, {
+            [styles.imageFull]: props.isFullPost,
+          })}
           src={props.imageUrl}
           alt={props.title}
         />
       )}
-      <div className="wrapper">
+      <div className={styles.wrapper}>
         <UserInfo {...props.user} additionalText={props.createdAt} />
-        <div className="indention">
-          <h2 className={clsx("title", { titleFull: props.isFullPost })}>
+        <div className={styles.indention}>
+          <h2
+            className={clsx(styles.title, {
+              [styles.titleFull]: props.isFullPost,
+            })}
+          >
             {props.isFullPost ? (
               props.title
             ) : (
-              <Link to={`/posts/${props._id}`}>{props.title}</Link>
+              <a href={`/posts/${props._id}`}>{props.title}</a>
             )}
           </h2>
-          {props.children && <div className="content">{props.children}</div>}
-          <ul className="postDetails">
+          {props.children && (
+            <div className={styles.content}>{props.children}</div>
+          )}
+          <ul className={styles.postDetails}>
             <li>
               <EyeIcon />
               <span>{props.viewsCount}</span>

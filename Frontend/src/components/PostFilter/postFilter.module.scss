@@ -1,4 +1,4 @@
-.post-filter {
+.postFilter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,13 +6,18 @@
   margin-top: 2rem !important;
 }
 
-.filter-item {
+.filterItem {
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
 }
 
-.active-filter {
+.activeFilter {
+  --second-color: #fd8f44;
+  --bg-color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
   background: var(--second-color);
   color: var(--bg-color);
   padding: 4px 10px;

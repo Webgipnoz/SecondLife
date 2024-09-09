@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../scss/header/header.scss";
+import styles from "./header.module.scss";
 
 const Header: React.FC = () => {
   const [isAuth, setIsAuth] = useState(true);
@@ -11,37 +11,37 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <div className="header">
-        <div className="nav container">
-          <Link to="/" className="logo">
+      <div className={styles.header}>
+        <div className={styles.nav}>
+          <Link to="/" className={styles.logo}>
             Second<span>Life</span>
           </Link>
-          <div className="buttons-container">
+          <div className={styles.buttonsContainer}>
             {isAuth ? (
               <>
-                <Link to="/addPost" className="login">
+                <Link to="/addPost" className={styles.login}>
                   Add Post
                 </Link>
-                <Link to="#" onClick={onClickLogout} className="login">
+                <Link to="#" onClick={onClickLogout} className={styles.login}>
                   Log Out
                 </Link>
               </>
             ) : (
               <>
-                <Link to="/auth/register" className="login">
+                <Link to="/auth/register" className={styles.login}>
                   Register
                 </Link>
-                <Link to="/auth/login" className="login">
+                <Link to="/auth/login" className={styles.login}>
                   Login
                 </Link>
               </>
             )}
           </div>
         </div>
-        <section className="home" id="home">
-          <div className="home-text container">
-            <h2 className="home-title">SecondLife Blog</h2>
-            <span className="home-subtitle">
+        <section className={styles.home} id={styles.home}>
+          <div className={styles.homeText}>
+            <h2 className={styles.homeTitle}>SecondLife Blog</h2>
+            <span className={styles.homeSubtitle}>
               Your guide to the world of emigration
             </span>
           </div>

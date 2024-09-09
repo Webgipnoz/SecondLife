@@ -37,33 +37,30 @@ const HomePage = () => {
         <Tab label="New" />
         <Tab label="Popular" />
       </Tabs>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Grid container spacing={4} style={{ maxWidth: "80%" }}>
-          <Grid xs={8} item>
-            {(isPostsLoading ? [...Array(5)] : filteredPosts).map(
-              (obj, index) =>
-                isPostsLoading ? (
-                  <SkeletonBlock key={index} />
-                ) : (
-                  <PostBlock
-                    isLoading={false}
-                    key={index}
-                    _id={obj._id}
-                    title={obj.title}
-                    category={obj.category}
-                    imageUrl={obj.imageUrl}
-                    text={obj.text}
-                    fullName={obj.fullName}
-                    createdAt={obj.createdAt}
-                    user={obj.user}
-                    viewsCount={obj.viewsCount}
-                    commentsCount={obj.commentsCount}
-                  />
-                )
-            )}
-          </Grid>
+      <Grid container spacing={4} style={{ maxWidth: "80%" }}>
+        <Grid xs={8} item>
+          {(isPostsLoading ? [...Array(5)] : filteredPosts).map((obj, index) =>
+            isPostsLoading ? (
+              <SkeletonBlock key={index} />
+            ) : (
+              <PostBlock
+                isLoading={false}
+                key={index}
+                _id={obj._id}
+                title={obj.title}
+                category={obj.category}
+                imageUrl={obj.imageUrl}
+                text={obj.text}
+                fullName={obj.fullName}
+                createdAt={obj.createdAt}
+                user={obj.user}
+                viewsCount={obj.viewsCount}
+                commentsCount={obj.commentsCount}
+              />
+            )
+          )}
         </Grid>
-      </div>
+      </Grid>
     </>
   );
 };

@@ -13,8 +13,6 @@ import Container from "@mui/material/Container";
 
 import store from "./redux/store";
 
-import "./scss/index.scss";
-
 function App() {
   return (
     <Provider store={store}>

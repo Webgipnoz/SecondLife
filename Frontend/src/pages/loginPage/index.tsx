@@ -1,69 +1,29 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
-import "../../scss/login/login.scss";
-import axios from "../../api/axios";
+import styles from "./login.module.scss";
 
-const loginUrl = "/auth/login";
-
-const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const email = (document.getElementById("email") as HTMLInputElement).value;
-    const password = (document.getElementById("password") as HTMLInputElement)
-      .value;
-
-    // Создаем объект данных для отправки
-    const data = {
-      email: email,
-      password: password,
-    };
-
-    // Отправляем данные на бэкенд
-    try {
-      // Отправляем данные на бэкенд
-      const response = await axios.post(loginUrl, data);
-
-      // Обработка успешного ответа от сервера
-      console.log("Успешно вошли в систему");
-      navigate("/auth/account");
-    } catch (error) {
-      // Обработка ошибки
-      console.error("Ошибка входа в систему", error);
-    }
-  };
-
+const LoginPage = () => {
   return (
-    <>
-      <div className="centered-content">
-        <div className="login-form">
-          <form onSubmit={handleSignIn}>
-            <div className="input-group">
-              <label>Email</label>
-              <input type="text" id="email" placeholder="Enter your email" />
-            </div>
-            <div className="input-group">
-              <label>Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-              />
-            </div>
-            <button type="submit" className="submit-button">
-              Sign In
-            </button>
-            <button className="submit-button">
-              <Link to="/auth/register">Sign Up</Link>
-            </button>
-          </form>
-        </div>
-      </div>
-    </>
+    <Paper classes={styles.root}>
+      <Typography classes="title" variant="h5">
+        Enter to Your acc
+      </Typography>
+      <TextField
+        className={styles.field}
+        label="E-Mail"
+        error
+        helperText="Your main is error"
+        fullWidth
+      />
+      <TextField className={styles.field} label="Password" fullWidth />
+      <Button size="large" variant="contained" fullWidth>
+        Enter
+      </Button>
+    </Paper>
   );
 };
 

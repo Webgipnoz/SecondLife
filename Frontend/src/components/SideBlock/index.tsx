@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
-import "../../scss/sideBlock/sideBlock.scss";
+import styles from "./sideBlock.module.scss";
 
 type SideBlockProps = {
   title: string;
@@ -11,8 +11,8 @@ type SideBlockProps = {
 
 export const SideBlock: React.FC<SideBlockProps> = ({ title, children }) => {
   return (
-    <Paper classes={{ root: "root" }}>
-      <Typography variant="h6" classes={{ root: "title" }}>
+    <Paper classes={styles.root}>
+      <Typography variant="h6" classes={styles.title}>
         {title}
       </Typography>
       {children}
