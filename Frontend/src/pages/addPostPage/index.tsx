@@ -1,25 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import SimpleMDE from "react-simplemde-editor";
-
 import axios from "../../api/axios";
 import "easymde/dist/easymde.min.css";
 import styles from "./addPost.module.scss";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/authSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const AddPost = () => {
   const isAuth = useSelector(selectIsAuth);
+  const { _id } = useParams();
   const navigate = useNavigate();
-  const [category, setCategory] = React.useState<number | "">("");
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [text, setText] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [imageUrl, setImageUrl] = React.useState("");
-  const inputFileRef = React.useRef<HTMLInputElement | null>(null);
+  const [category, setCategory] = useState<number | "">("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   const handleChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -34,7 +35,7 @@ export const AddPost = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("Error with inst file");
+      alert("Error with image upload");
     }
   };
 
@@ -59,20 +60,40 @@ export const AddPost = () => {
         category,
       };
 
-      const { data } = await axios.post("/posts", fields);
-
-      const id = data._id;
-
-      navigate(`/posts/${id}`);
+      if (_id) {
+        await axios.patch(`/posts/${_id}`, fields);
+      } else {
+        const { data } = await axios.post("/posts", fields);
+        navigate(`/posts/${data._id}`);
+      }
     } catch (err) {
       console.warn(err);
-      alert("Error with your creation of post");
+      alert("Error with your post operation");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const onChange = React.useCallback((value: string) => {
+  const onChange = useCallback((value: string) => {
     setText(value);
   }, []);
+
+  useEffect(() => {
+    if (_id) {
+      axios
+        .get(`/posts/${_id}`)
+        .then(({ data }) => {
+          setTitle(data.title);
+          setText(data.text);
+          setImageUrl(data.imageUrl);
+          setCategory(data.category);
+        })
+        .catch((error) => {
+          console.warn(error);
+          alert("Error fetching post data");
+        });
+    }
+  }, [_id]);
 
   const options = React.useMemo(
     () => ({
@@ -118,7 +139,6 @@ export const AddPost = () => {
           >
             Delete
           </Button>
-
           <img
             className={styles.image}
             src={`http://localhost:5000${imageUrl}`}
@@ -141,9 +161,7 @@ export const AddPost = () => {
         value={category}
         onChange={handleCategoryChange}
         fullWidth
-        SelectProps={{
-          native: true,
-        }}
+        SelectProps={{ native: true }}
       >
         <option value="" disabled>
           Choose a Category of Post
@@ -159,12 +177,17 @@ export const AddPost = () => {
         options={options}
       />
       <div className={styles.buttons}>
-        <Button onClick={onSubmit} size="large" variant="contained">
-          Add
+        <Button
+          onClick={onSubmit}
+          size="large"
+          variant="contained"
+          disabled={isLoading}
+        >
+          {_id ? "Update" : "Add"}
         </Button>
-        <a href="/">
-          <Button size="large">Canсel</Button>
-        </a>
+        <Link to="/">
+          <Button size="large">Cancel</Button>
+        </Link>
       </div>
     </Paper>
   );
