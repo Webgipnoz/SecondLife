@@ -55,11 +55,12 @@ const LoginPage = () => {
           error={Boolean(errors.email?.message)}
           type="email"
           helperText={errors.email?.message}
-          {...register("email", { required: "Add your main" })}
+          {...register("email", { required: "Add your mail" })}
           fullWidth
         />
         <TextField
           className={styles.field}
+          type="password"
           label="Password"
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
