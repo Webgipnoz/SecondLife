@@ -5,6 +5,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
+import checkAuth from "./utils/checkAuth.js";
 
 mongoose
   .connect("mongodb+srv://Admin:Admin@cluster0.djv28ee.mongodb.net/")
@@ -31,6 +32,11 @@ app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
+app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
+  res.json({
+    url: `/uploads/${req.file.originalname}`,
+  });
+});
 // use routes
 app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);

@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import SimpleMDE from "react-simplemde-editor";
 
+import axios from "../../api/axios";
 import "easymde/dist/easymde.min.css";
 import styles from "./addPost.module.scss";
 import { useSelector } from "react-redux";
@@ -11,14 +12,33 @@ import { selectIsAuth } from "../../redux/slices/authSlice";
 import { Navigate } from "react-router-dom";
 
 export const AddPost = () => {
-  const imageUrl = "";
   const isAuth = useSelector(selectIsAuth);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [value, setValue] = React.useState("");
   const [title, setTitle] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState("");
+  const inputFileRef = React.useRef<HTMLInputElement | null>(null);
 
-  const handleChangeFile = () => {};
+  const handleChangeFile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    try {
+      const files = event.target.files;
+      if (files && files[0]) {
+        const formData = new FormData();
+        formData.append("image", files[0]);
+        const { data } = await axios.post("/upload", formData);
+        setImageUrl(data.url);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Error with inst file");
+    }
+  };
 
-  const onClickRemoveImage = () => {};
+  const onClickRemoveImage = () => {
+    setImageUrl("");
+  };
 
   const onChange = React.useCallback((value: string) => {
     setValue(value);
@@ -48,21 +68,35 @@ export const AddPost = () => {
 
   return (
     <Paper style={{ padding: 30 }}>
-      <Button variant="outlined" size="large">
+      <Button
+        onClick={() => inputFileRef.current && inputFileRef.current.click()}
+        variant="outlined"
+        size="large"
+      >
         Enter preview
       </Button>
-      <input type="file" onChange={handleChangeFile} hidden />
+      <input
+        ref={inputFileRef}
+        type="file"
+        onChange={handleChangeFile}
+        hidden
+      />
       {imageUrl && (
-        <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-          Delete
-        </Button>
-      )}
-      {imageUrl && (
-        <img
-          className={styles.image}
-          src={`http://localhost:5000${imageUrl}`}
-          alt="Uploaded"
-        />
+        <>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={onClickRemoveImage}
+          >
+            Delete
+          </Button>
+
+          <img
+            className={styles.image}
+            src={`http://localhost:5000${imageUrl}`}
+            alt="Uploaded"
+          />
+        </>
       )}
       <br />
       <br />
