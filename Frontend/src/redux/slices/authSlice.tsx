@@ -10,6 +10,11 @@ export const fetchAuth = createAsyncThunk(
   }
 );
 
+export const fetchAuthMe = createAsyncThunk("auth/fetchAuthMe", async () => {
+  const { data } = await axios.get("/auth/me");
+  return data;
+});
+
 export interface AuthSlice {
   data: any;
   status: string;
@@ -32,6 +37,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //fetchAuth
     builder.addCase(fetchAuth.pending, (state) => {
       state.data = null;
       state.status = "loading";
@@ -40,10 +46,29 @@ export const authSlice = createSlice({
     builder.addCase(fetchAuth.fulfilled, (state, action) => {
       state.data = action.payload;
       state.status = "loaded";
+      state.isAuthenticated = true;
     });
     builder.addCase(fetchAuth.rejected, (state) => {
       state.data = null;
       state.status = "error";
+      state.isAuthenticated = false;
+    });
+
+    //fetchAuthMe
+    builder.addCase(fetchAuthMe.pending, (state) => {
+      state.data = null;
+      state.status = "loading";
+      state.isAuthenticated = true;
+    });
+    builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = "loaded";
+      state.isAuthenticated = true;
+    });
+    builder.addCase(fetchAuthMe.rejected, (state) => {
+      state.data = null;
+      state.status = "error";
+      state.isAuthenticated = false;
     });
   },
 });

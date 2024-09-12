@@ -1,3 +1,4 @@
+import React from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
@@ -26,8 +27,16 @@ const LoginPage = () => {
     },
   });
 
-  const onSubmit = (values: { email: string; password: string }) => {
-    dispatch(fetchAuth(values));
+  const onSubmit = async (values: { email: string; password: string }) => {
+    const data = await dispatch(fetchAuth(values));
+
+    if (!data.payload) {
+      return alert("error with auth");
+    }
+
+    if ("token" in data.payload) {
+      window.localStorage.setItem("token", data.payload.token);
+    }
   };
 
   if (isAuth) {

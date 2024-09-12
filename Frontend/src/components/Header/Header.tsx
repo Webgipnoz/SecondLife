@@ -11,6 +11,7 @@ const Header: React.FC = () => {
   const onClickLogout = () => {
     if (window.confirm("Are you sure y wanna logout?")) {
       dispatch(logout());
+      window.localStorage.removeItem("token");
     }
   };
 

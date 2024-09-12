@@ -11,8 +11,8 @@ type SideBlockProps = {
 
 export const SideBlock: React.FC<SideBlockProps> = ({ title, children }) => {
   return (
-    <Paper classes={styles.root}>
-      <Typography variant="h6" classes={styles.title}>
+    <Paper className={styles.root}>
+      <Typography variant="h6" className={styles.title}>
         {title}
       </Typography>
       {children}

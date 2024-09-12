@@ -1,5 +1,9 @@
+import React from "react";
 import { Provider } from "react-redux/es/exports";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { fetchAuthMe, selectIsAuth } from "./redux/slices/authSlice";
+import { AppDispatch } from "./redux/store";
 
 import HomePage from "./pages/homePage";
 import PostPage from "./pages/postPage";
@@ -14,6 +18,13 @@ import Container from "@mui/material/Container";
 import store from "./redux/store";
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
+  const isAuth = useSelector(selectIsAuth);
+
+  React.useEffect(() => {
+    dispatch(fetchAuthMe());
+  }, []);
+
   return (
     <Provider store={store}>
       <Header />
