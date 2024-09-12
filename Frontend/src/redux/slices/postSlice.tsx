@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import { Post } from "../../types/post";
 import { apiService } from "../../api/index";
 import axios from "../../api/axios";
@@ -10,6 +9,11 @@ export const fetchPosts = createAsyncThunk<Post[]>(
     const data = await apiService.getPosts();
     return data as Post[];
   }
+);
+
+export const fetchRemovePost = createAsyncThunk<number, number>(
+  "posts/fetchRemovePost",
+  async (id) => axios.delete(`/posts/${id}`)
 );
 
 export interface PostSlice {
@@ -31,6 +35,7 @@ export const postSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // get post
     builder.addCase(fetchPosts.pending, (state) => {
       state.posts.status = "loading";
     });
@@ -41,6 +46,12 @@ export const postSlice = createSlice({
     builder.addCase(fetchPosts.rejected, (state) => {
       state.posts.items = [];
       state.posts.status = "error";
+    });
+    // delete post
+    builder.addCase(fetchRemovePost.fulfilled, (state, action) => {
+      state.posts.items = state.posts.items.filter(
+        (obj) => obj._id !== action.meta.arg
+      );
     });
   },
 });

@@ -11,8 +11,11 @@ import { Link } from "react-router-dom";
 import { Post } from "../../types/post";
 
 import styles from "./posts.module.scss";
+import { AppDispatch } from "../../redux/store";
 import { UserInfo } from "../UserInfo";
 import SkeletonBlock from "./SkeletonBlock";
+import { useDispatch } from "react-redux";
+import { fetchRemovePost } from "../../redux/slices/postSlice";
 
 type LoadingPostProps = {
   isLoading: true;
@@ -34,11 +37,17 @@ type PostProps = Post & {
 type Props = LoadingPostProps | PostProps;
 
 export const PostBlock: React.FC<Props> = (props) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   if (props.isLoading) {
     return <SkeletonBlock />;
   }
 
-  const onClickRemove = () => {};
+  const onClickRemove = () => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(fetchRemovePost(props._id));
+    }
+  };
 
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: props.isFullPost })}>
