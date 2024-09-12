@@ -33,6 +33,7 @@
     "react-simplemde-editor": "^5.2.0",
     "redux": "^4.2.1",
     "sass": "^1.62.1",
+    "simplemde": "^1.11.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

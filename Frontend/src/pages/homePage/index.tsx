@@ -15,6 +15,7 @@ import CommentsBlock from "../../components/CommentsBlock";
 
 const HomePage = () => {
   const dispatch: AppDispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.auth.data);
   const { posts } = useSelector((state: RootState) => state.posts);
   const activeFilter = useSelector((state: RootState) => state.filter.idFilter);
   const isPostsLoading = posts.status === "loading";
@@ -57,6 +58,7 @@ const HomePage = () => {
                 user={obj.user}
                 viewsCount={obj.viewsCount}
                 commentsCount={obj.commentsCount}
+                isEditable={userData?._id === obj.user._id}
               />
             )
           )}
