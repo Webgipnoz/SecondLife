@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./header.module.scss";
+import { logout, selectIsAuth } from "../../redux/slices/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header: React.FC = () => {
-  const [isAuth, setIsAuth] = useState(true);
+  const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
 
   const onClickLogout = () => {
-    setIsAuth(!isAuth);
+    if (window.confirm("Are you sure y wanna logout?")) {
+      dispatch(logout());
+    }
   };
 
   return (

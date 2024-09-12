@@ -1,4 +1,3 @@
-import React from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
@@ -6,13 +5,14 @@ import Button from "@mui/material/Button";
 
 import { AppDispatch } from "../../redux/store";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { fetchAuth } from "../../redux/slices/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAuth, selectIsAuth } from "../../redux/slices/authSlice";
+import { Navigate } from "react-router-dom";
 
 import styles from "./login.module.scss";
 
 const LoginPage = () => {
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch<AppDispatch>();
   const {
     register,
@@ -29,6 +29,10 @@ const LoginPage = () => {
   const onSubmit = (values: { email: string; password: string }) => {
     dispatch(fetchAuth(values));
   };
+
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Paper className={styles.root}>
