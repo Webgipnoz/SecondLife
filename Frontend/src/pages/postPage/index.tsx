@@ -3,6 +3,7 @@ import PostBlock from "../../components/PostBlock/PostBlock";
 import { useParams } from "react-router-dom";
 import { Post } from "../../types/post";
 import axios from "../../api/axios";
+import ReactMarkDown from "react-markdown";
 
 import CommentsBlock from "../../components/CommentsBlock";
 import AddComment from "../../components/AddComment";
@@ -40,7 +41,7 @@ const PostPage = () => {
           <PostBlock
             _id={data._id}
             title={data.title}
-            imageUrl={data.imageUrl}
+            imageUrl={`http://localhost:5000${data.imageUrl}`}
             category={data.category}
             text={data.text}
             user={{
@@ -55,7 +56,7 @@ const PostPage = () => {
             isFullPost
             isLoading={false}
           >
-            <p>{data.text}</p>
+            <ReactMarkDown children={data.text} />
           </PostBlock>
         )}
       </div>

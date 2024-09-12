@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -9,12 +9,14 @@ import "easymde/dist/easymde.min.css";
 import styles from "./addPost.module.scss";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/authSlice";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const AddPost = () => {
   const isAuth = useSelector(selectIsAuth);
+  const navigate = useNavigate();
+  const [category, setCategory] = React.useState<number | "">("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [text, setText] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
   const inputFileRef = React.useRef<HTMLInputElement | null>(null);
@@ -36,12 +38,40 @@ export const AddPost = () => {
     }
   };
 
+  const handleCategoryChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setCategory(event.target.value as number);
+  };
+
   const onClickRemoveImage = () => {
     setImageUrl("");
   };
 
+  const onSubmit = async () => {
+    try {
+      setIsLoading(true);
+
+      const fields = {
+        title,
+        imageUrl,
+        text,
+        category,
+      };
+
+      const { data } = await axios.post("/posts", fields);
+
+      const id = data._id;
+
+      navigate(`/posts/${id}`);
+    } catch (err) {
+      console.warn(err);
+      alert("Error with your creation of post");
+    }
+  };
+
   const onChange = React.useCallback((value: string) => {
-    setValue(value);
+    setText(value);
   }, []);
 
   const options = React.useMemo(
@@ -63,8 +93,6 @@ export const AddPost = () => {
   if (!window.localStorage.getItem("token") && !isAuth) {
     return <Navigate to="/" />;
   }
-
-  console.log(title, value);
 
   return (
     <Paper style={{ padding: 30 }}>
@@ -108,14 +136,30 @@ export const AddPost = () => {
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
       />
+      <TextField
+        select
+        value={category}
+        onChange={handleCategoryChange}
+        fullWidth
+        SelectProps={{
+          native: true,
+        }}
+      >
+        <option value="" disabled>
+          Choose a Category of Post
+        </option>
+        <option value={1}>Documents</option>
+        <option value={2}>Help</option>
+        <option value={3}>Family</option>
+      </TextField>
       <SimpleMDE
         className={styles.editor}
-        value={value}
+        value={text}
         onChange={onChange}
         options={options}
       />
       <div className={styles.buttons}>
-        <Button size="large" variant="contained">
+        <Button onClick={onSubmit} size="large" variant="contained">
           Add
         </Button>
         <a href="/">

@@ -51,7 +51,9 @@ const HomePage = () => {
                 _id={obj._id}
                 title={obj.title}
                 category={obj.category}
-                imageUrl={obj.imageUrl}
+                imageUrl={
+                  obj.imageUrl ? `http://localhost:5000${obj.imageUrl}` : ""
+                }
                 text={obj.text}
                 fullName={obj.fullName}
                 createdAt={obj.createdAt}
