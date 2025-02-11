@@ -14,18 +14,19 @@ With SecondLife, users can:
 
 **Clone the repository:**
 
-   ``bash
+   ```bash
    git clone https://github.com/Webgipnoz/SecondLife.git
    cd SecondLife
 
-    # Frontend
+   ```
+   ```Frontend
       cd Frontend
       npm install
-
-    # Backend
+   ```
+   ```Backend
       cd ../Backend
       npm install
-
+   ```
 Usage
 Run the frontend:
     cd Frontend
