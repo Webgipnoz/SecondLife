@@ -27,17 +27,6 @@ With SecondLife, users can:
       cd ../Backend
       npm install
    ```
-Usage
-Run the frontend:
-    cd Frontend
-      npm start
-      The frontend will be available at http://localhost:3000.
-
-Run the backend:
-    cd Backend
-      npm start
-      The backend will be running on http://localhost:5000.
-
 
 Technologies
   Frontend:
